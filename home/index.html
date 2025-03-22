@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro Furniture Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-text">CureLink</div>
+            </div>
+            
+            <div class="nav-item active">
+                <a href="/home/index.html" class="nav-link">
+                    <div class="nav-icon">📊</div>
+                    <div>Dashboard</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/order/index.html" class="nav-link">
+                    <div class="nav-icon">🛒</div>
+                    <div>Orders</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/inventory/index.html" class="nav-link">
+                    <div class="nav-icon">💳</div>
+                    <div>Inventory</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/billing/index.html" class="nav-link">
+                    <div class="nav-icon">↔️</div>
+                    <div>Billing</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/reports/reports.html" class="nav-link">
+                    <div class="nav-icon">📊</div>
+                    <div>Reports</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/ML/index.html" class="nav-link">
+                    <div class="nav-icon">📈</div>
+                    <div>Stock Prediction</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">⚙️</div>
+                    <div>Settings</div>
+                </a>
+            </div>
+            
+            <div class="nav-divider"></div>
+            
+            <div class="nav-item logout">
+                <div class="nav-icon">🚪</div>
+                <div>Logout</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="page-title">Dashboard</div>
+                <div class="search-notification">
+                    <div class="search-bar">
+                        <span>🔍</span>
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div>🔔</div>
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="/api/placeholder/36/36" alt="User Avatar">
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">Gokul GK</div>
+                            <div class="user-role">Manager</div>
+                        </div>
+                        <div>▼</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="date-range">
+                <div class="date-range-text">
+                    <span>📅</span>
+                    <span>10 Mar - 16 Mar</span>
+                </div>
+                <div class="dropdown">
+                    <span>Week</span>
+                    <span>▼</span>
+                </div>
+            </div>
+            
+            <div class="section-title">Activity</div>
+            
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-title">Total Inventory</div>
+                    <div class="stat-value">1,234</div>
+                    <div class="stat-trend trend-up">
+                        <span>↑ 5.6% from last week</span>
+                    </div>
+                    <div class="badge badge-blue">ⓘ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Pending Orders</div>
+                    <div class="stat-value">56</div>
+                    <div class="stat-trend trend-down">
+                        <span>↓ 2.3% from last week</span>
+                    </div>
+                    <div class="badge badge-red">⚠</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Stock Alerts</div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-trend trend-up">
+                        <span>↑ 3.4% from last week</span>
+                    </div>
+                    <div class="badge badge-orange">⚠</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Emergency Requests</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-trend trend-down">
+                        <span>↓ 1.2% from last week</span>
+                    </div>
+                    <div class="badge badge-purple">⚠</div>
+                </div>
+            </div>
+            
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <div class="card-title">Sales & Purchase</div>
+                        <div class="dropdown">
+                            <span>Week</span>
+                            <span>▼</span>
+                        </div>
+                    </div>
+                    <div>Sales</div>
+                    <div>Total sales and purchases statistics on week</div>
+                    <div class="chart-container">
+                        <div class="bar-chart">
+                            <div class="bar-group">
+                                <div class="bar" style="height: 100px;"></div>
+                                <div class="bar-label">Mon</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 60px;"></div>
+                                <div class="bar-label">Tue</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 120px;"></div>
+                                <div class="bar-label">Wed</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 80px;"></div>
+                                <div class="bar-label">Thu</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 90px;"></div>
+                                <div class="bar-label">Fri</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 110px;"></div>
+                                <div class="bar-label">Sat</div>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 70px;"></div>
+                                <div class="bar-label">Sun</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="card-header">
+                        <div class="card-title">Previous Bills</div>
+                        <div class="dropdown">
+                            <span>Last 7 Days</span>
+                            <span>▼</span>
+                        </div>
+                    </div>
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>Bill ID</th>
+                                <th>Date</th>
+                                <th>Customer Name</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#12345</td>
+                                <td>10 Mar 2024</td>
+                                <td>Rajesh Kumar</td>
+                                <td>₹2,500</td>
+                                <td><span class="status-pill status-paid">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12346</td>
+                                <td>11 Mar 2024</td>
+                                <td>Soundhram T</td>
+                                <td>₹1,800</td>
+                                <td><span class="status-pill status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12347</td>
+                                <td>12 Mar 2024</td>
+                                <td>Anjali S</td>
+                                <td>₹3,200</td>
+                                <td><span class="status-pill status-paid">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>#12348</td>
+                                <td>13 Mar 2024</td>
+                                <td>Vijay R</td>
+                                <td>₹2,100</td>
+                                <td><span class="status-pill status-paid">Paid</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="font-size: 12px; color: #666; margin-top: 10px;">Showing 4 of 10 Results</div>
+                    <div class="pagination">
+                        <div class="page-item active">1</div>
+                        <div class="page-item">2</div>
+                        <div class="page-item">3</div>
+                        <div class="page-item">→</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-orders">
+                <div class="orders-header">
+                    <div class="card-title">Recent Orders</div>
+                    <div class="view-all">View All</div>
+                </div>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="checkbox"></th>
+                            <th>Product</th>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-img">🪑</div>
+                                    <div>Grace Accent Chair</div>
+                                </div>
+                            </td>
+                            <td>#436987</td>
+                            <td>Rajesh Kumar</td>
+                            <td>2</td>
+                            <td>₹25,598</td>
+                            <td><span class="status-pill status-paid">Paid</span></td>
+                            <td><span class="status-pill status-delivered">Delivered</span></td>
+                            <td>
+                                <div class="action-icons">
+                                    <div class="action-icon">👁️</div>
+                                    <div class="action-icon">❌</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-img">🪑</div>
+                                    <div>Carvan Lounge Chair</div>
+                                </div>
+                            </td>
+                            <td>#438870</td>
+                            <td>Soundhram T</td>
+                            <td>3</td>
+                            <td>₹35,397</td>
+                            <td><span class="status-pill status-pending">Pending</span></td>
+                            <td><span class="status-pill status-processing">Processing</span></td>
+                            <td>
+                                <div class="action-icons">
+                                    <div class="action-icon">👁️</div>
+                                    <div class="action-icon">❌</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Revenue Overview Section -->
+            <div class="revenue-overview">
+                <div class="card-header">
+                    <div class="card-title">Revenue Overview</div>
+                    <div class="dropdown">
+                        <span>Month</span>
+                        <span>▼</span>
+                    </div>
+                </div>
+                <div class="revenue-details">
+                    <div class="total-revenue">₹180,000</div>
+                    <div class="revenue-trend">↓ 2.3% from last month</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-text">CureLink</div>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item ">
+                    <a href="/home/index.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Dashboard</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="/categories/index.html" class="nav-link">
+                        <div class="nav-icon">🗂️</div>
+                        <div>Categories</div>
+                    </a>
+                </div> -->
+                <div class="nav-item active">
+                    <a href="/order/index.html" class="nav-link">
+                        <div class="nav-icon">🛒</div>
+                        <div>Orders</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/inventory/index.html" class="nav-link">
+                        <div class="nav-icon">💳</div>
+                        <div>Inventory</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/billing/index.html" class="nav-link">
+                        <div class="nav-icon">↔️</div>
+                        <div>Billing</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/reports/reports.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Reports</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/ML/index.html" class="nav-link">
+                        <div class="nav-icon">📈</div>
+                        <div>Stock Prediction</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">🏭</div>
+                        <div>Supplier</div>
+                    </a>
+                </div> -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">⚙️</div>
+                        <div>Settings</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <div class="nav-icon">👥</div>
+                    <div>Users</div>
+                </div> -->
+                <!-- <div class="nav-item">
+                    <div class="nav-icon">⚙️</div>
+                    <div>Settings</div>
+                </div> -->
+            </div>
+            
+            <div class="nav-divider"></div>
+            
+            <div class="nav-item logout">
+                <div class="nav-icon">🚪</div>
+                <div>Logout</div>
+            </div>
+        </div>
+    
+        <!-- Right Section -->
+        <div class="right-section">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <input type="text" placeholder="Search here..." class="search-bar">
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="breadcrumb-section">
+                    <div class="breadcrumb">
+                        Main > Order Management
+                        <div class="date-controls">
+                            <div class="performance">
+                                <h1>Orders</h1>
+                            </div>
+                            <div class="search-section">
+                                <input type="text" id="searchInput" placeholder="Search">
+                                <button onclick="searchData()">Search</button>
+                            </div>                       
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Stats Grid - Second Row -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Cancelled</h3>
+                        <h2 id="outOfStockCount"></h2>
+                        <canvas id="clinicsChart" style="width: 100%; height: 150px;"></canvas>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Delivered</h3>
+                        <h2></h2>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Unavailable</h3>
+                        <h2>111</h2>
+                        <canvas id="usersChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="syrup">Syrup</option>
+                            <option value="capsule">Capsule</option>
+                        </select>
+
+                        <select id="stockFilter" class="filter-select">
+                            <option value="">All Stock Status</option>
+                            <option value="In Stock">In Stock</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                            <option value="Low Stock">Low Stock</option>
+                        </select>
+
+                        <select id="expireFilter" class="filter-select">
+                            <option value="">Expiry Sort</option>
+                            <option value="asc">Nearest First</option>
+                            <option value="desc">Latest First</option>
+                        </select>
+
+                        <button id="resetFilters" class="filter-button">Reset Filters</button>
+                    </div>
+                </div>
+
+
+                <!-- Replace the existing customer panel div with this code -->
+                <div id="customerPanel" class="panel active">
+                    <h2>Place New Order</h2>
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="vendorSelect">Select Vendor:</label>
+                            <select id="vendorSelect" required>
+                                <option value="">Select a vendor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="medicineName">Medicine Name:</label>
+                            <input type="text" id="medicineName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" required min="1">
+                        </div>
+                        <button type="submit">Place Order</button>
+                    </form>
+
+                    <h3>My Orders</h3>
+                    <table id="hospitalOrders">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Medicine</th>
+                                <th>Quantity</th>
+                                <th>Vendor</th>
+                                <th>Status</th>
+                                <th>Order Date</th>
+                                <th>Delivery Date</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="fab-container">
+                    <div class="fab-options">
+                        <div class="fab-option">
+                            <span class="fab-option-label">Add Order</span>
+                            <a href="/add.html" class="fab-option-button">
+                                <i class="fas fa-pills"></i>
+                            </a>
+                        </div>
+                        <div class="fab-option">
+                            <span class="fab-option-label">Reports</span>
+                            <a href="/reports.html" class="fab-option-button">
+                                <i class="fas fa-chart-bar"></i>
+                            </a>
+                        </div>
+                        <div class="fab-option">
+                            <span class="fab-option-label">Settings</span>
+                            <a href="/settings.html" class="fab-option-button">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                        </div>
+                        <div class="fab-option">
+                            <span class="fab-option-label">Inventory</span>
+                            <a href="/inventory.html" class="fab-option-button">
+                                <i class="fas fa-boxes"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fab-main">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            
+                
+    
+    <script src="order.js"></script>
+</body>
+
+</html>

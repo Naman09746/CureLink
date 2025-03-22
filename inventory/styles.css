@@ -1,0 +1,502 @@
+/* Table Container Styles */
+table {
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* Header Styles */
+thead {
+    background-color: #f8f9fd;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+th {
+    color: #666;
+    font-weight: 600;
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 2px solid #eef0f5;
+    font-size: 0.95rem;
+}
+
+/* Body Styles */
+td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eef0f5;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+/* Input Styles within Table */
+.editable {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+.editable:focus {
+    outline: none;
+    border-color: #4A6572; /* Changed to a more furniture-appropriate color */
+    box-shadow: 0 0 0 2px rgba(74, 101, 114, 0.1);
+}
+
+/* Button Styles within Table */
+td button {
+    padding: 6px 12px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+td button:first-child {
+    background-color: #4A6572; /* Changed to a more furniture-appropriate color */
+    color: white;
+}
+
+td button:last-child {
+    background-color: #f0f0f5;
+    color: #666;
+}
+
+td button:hover {
+    opacity: 0.9;
+}
+
+/* Row Hover Effect */
+tbody tr:hover {
+    background-color: #f8f9fd;
+}
+
+/* Add Entry Section Styles */
+div h2 {
+    margin: 30px 0 15px;
+    color: #333;
+}
+
+#productInput,
+#categoryInput,
+#vendorInput,
+#stockInput,
+#quantityInput,
+#availabilityInput {
+    padding: 10px 15px;
+    margin: 0 10px 10px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+div button {
+    padding: 10px 20px;
+    background-color: #4A6572; /* Changed to a more furniture-appropriate color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+div button:hover {
+    opacity: 0.9;
+}
+
+.filters-section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.filter-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 8px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    min-width: 150px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #4A6572; /* Changed color */
+    box-shadow: 0 0 0 2px rgba(74, 101, 114, 0.1);
+}
+
+.filter-button {
+    padding: 8px 20px;
+    background-color: #4A6572; /* Changed color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.filter-button:hover {
+    opacity: 0.9;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+.stat-card h3 {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+#inventoryChart {
+    height: 60px;
+    margin-top: -50px;
+}
+
+.stat-card canvas {
+    flex: 1;
+    min-height: 100px;
+}
+
+#stockChart {
+    height: 200px;
+    width: 100%;
+    margin: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: #f5f6fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f7;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 220px;
+    background-color: #2a2b5f;
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 20px;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.nav-menu {
+    margin-top: 20px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+    background-color: #5d5fef;
+    border-radius: 8px;
+    margin: 0 10px;
+    padding: 12px 10px;
+}
+
+.nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
+}
+
+.logout {
+    margin-top: auto;
+}
+
+/* Right Section */
+.right-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    background: white;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.search-bar {
+    padding: 8px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.main-content {
+    background: #f5f6fa;
+    padding: 20px;
+    flex: 1;
+}
+
+.breadcrumb-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.performance {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.date-controls {
+    color: black;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-section input {
+    border-radius: 10px;
+    height: 35px;
+    width: 200px;
+    padding-left: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.search-section button {
+    padding: 8px 20px;
+    background-color: #4A6572;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.search-section button:hover {
+    opacity: 0.9;
+}
+
+.breadcrumb {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* FAB Styles */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}
+
+.fab-main {
+    width: 56px;
+    height: 56px;
+    background: #4A6572;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.fab-options {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 16px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease-out;
+}
+
+.fab-option {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.fab-option-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.fab-option-label {
+    background: #333;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.2s ease;
+}
+
+.show-options .fab-options {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.show-options .fab-option-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fab-option-button:hover {
+    transform: scale(1.1);
+    background: #f5f5f5;
+}
+
+.fab-main:hover {
+    transform: scale(1.1);
+}
+
+.fab-main i {
+    transition: transform 0.3s ease;
+    font-size: 24px;
+}
+
+.show-options .fab-main i {
+    transform: rotate(45deg);
+}
+
+/* No results message */
+.no-results {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-style: italic;
+}

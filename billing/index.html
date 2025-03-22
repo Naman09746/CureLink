@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curelink CRM - Billing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                
+                <div class="logo-text">Curelink CRM</div>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-item ">
+                    <a href="/home/index.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Dashboard</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="/categories/index.html" class="nav-link">
+                        <div class="nav-icon">🗂️</div>
+                        <div>Categories</div>
+                    </a>
+                </div> -->
+                <div class="nav-item ">
+                    <a href="/order/index.html" class="nav-link">
+                        <div class="nav-icon">🛒</div>
+                        <div>Orders</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/inventory/index.html" class="nav-link">
+                        <div class="nav-icon">💳</div>
+                        <div>Inventory</div>
+                    </a>
+                </div>
+                <div class="nav-item active">
+                    <a href="/billing/index.html" class="nav-link">
+                        <div class="nav-icon">↔️</div>
+                        <div>Billing</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/reports/reports.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Reports</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/ML/index.html" class="nav-link">
+                        <div class="nav-icon">📈</div>
+                        <div>Stock Prediction</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">⚙️</div>
+                        <div>Settings</div>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+            <div class="nav-item logout">
+                <div class="nav-icon">🚪</div>
+                <div>Logout</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="page-title">Billing</div>
+               
+            </div>
+
+            <!-- Billing Form -->
+            <div class="billing-form">
+                <h2>Customer Information</h2>
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" placeholder="Enter customer name">
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Customer Phone Number</label>
+                    <input type="text" id="customerPhone" placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label for="customerEmail">Customer Email</label>
+                    <input type="email" id="customerEmail" placeholder="Enter email">
+                </div>
+
+                <h2>Item Details</h2>
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" placeholder="Enter item name">
+                </div>
+                
+                <h2>Order Details</h2>
+                <div class="form-group">
+                    <label for="orderId">Order ID</label>
+                    <input type="text" id="orderId" placeholder="Enter order ID">
+                </div>
+                <div class="form-group">
+                    <label for="orderDate">Order Date & Time</label>
+                    <input type="datetime-local" id="orderDate">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" placeholder="Enter quantity">
+                </div>
+                <div class="form-group">
+                    <label for="discount">Discounts/Offers</label>
+                    <input type="number" id="discount" placeholder="Enter discount">
+                </div>
+                <div class="form-group">
+                    <label for="tax">Tax/GST</label>
+                    <input type="number" id="tax" placeholder="Enter tax">
+                </div>
+                <div class="form-group">
+                    <label for="totalAmount">Total Bill Amount</label>
+                    <input type="number" id="totalAmount" readonly>
+                </div>
+
+                <h2>Payment Information</h2>
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod">
+                        <option value="Cash">Cash</option>
+                        <option value="Credit/Debit Card">Credit/Debit Card</option>
+                        <option value="UPI">UPI</option>
+                    </select>
+                </div>
+                
+                <button class="submit-button" onclick="submitOrder()">Submit Order</button>
+                <button class="print-button" onclick="printBill()">Print Bill</button>
+            </div>
+
+            <!-- All Bills Section -->
+            <div class="all-bills">
+                <h2>All Bills</h2>
+                <div id="bills-list"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Add this at the end of the body, before the script tag -->
+<div id="bill-template" style="display: none;">
+    <div class="bill-print">
+        <h1>MediGare Wholesale Pharmacy</h1>
+        <p>131Health Street, Mumbai, Maharashtra, India</p>
+        <p>📞 9345678991</p>
+        <hr>
+        <h2>A single stop for all your Healthcare needs!</h2>
+        <table>
+            <tr>
+                <th>OSTIN</th>
+                <th>TAX INVOICE</th>
+                <th>ORIGINAL FOR RECIPIENT</th>
+            </tr>
+            <tr>
+                <td>26CORPP9399N12A</td>
+                <td>Invoice No.</td>
+                <td id="print-orderId"></td>
+            </tr>
+            <tr>
+                <td>Customer Retail</td>
+                <td>Investor No.</td>
+                <td>27</td>
+            </tr>
+            <tr>
+                <td>M/S</td>
+                <td>HealthPro Pharmacy</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>C-Person</td>
+                <td>General Shipping</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>ASP Pharmacy Lane, Pune, Maharashtra, India</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>93354205311</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>eTerm</td>
+                <td>7734560123451122</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Place of Supply</td>
+                <td>Maharashtra (27)</td>
+                <td></td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <th>Name of Product Service</th>
+                <th>Schedule</th>
+                <th>MTS Date</th>
+                <th>Expiry Date</th>
+                <th>HSW Label</th>
+                <th>Key</th>
+                <th>App</th>
+                <th>Risk</th>
+                <th>Rate</th>
+                <th>Transfer Value</th>
+            </tr>
+            <tr>
+                <td id="print-itemName"></td>
+                <td>AI</td>
+                <td>Dec 2024</td>
+                <td>Dec 2025</td>
+                <td>20045831</td>
+                <td>10 FRS</td>
+                <td>20.00</td>
+                <td>40.00</td>
+                <td>10.00</td>
+                <td id="print-totalAmount"></td>
+            </tr>
+        </table>
+        <hr>
+        <p>REST (12.60 %)</p>
+        <p id="print-tax"></p>
+        <p id="print-discount"></p>
+        <hr>
+        <p>Total in words: <span id="print-totalInWords"></span></p>
+        <p>Total: <span id="print-totalAmountFinal"></span></p>
+        <hr>
+        <p>Terms and Conditions:</p>
+        <p>Subject to Maharashtra Junction:</p>
+        <p>Our Responsible Careers have no specific terms our Premises.</p>
+        <p>Deaths price paid will be taken back.</p>
+        <hr>
+        <p>Delivery Experience:</p>
+        <p>Customer Signature:</p>
+        <p>Admission Signature:</p>
+        <hr>
+        <p>Thanks for your order! We look forward to working with you again soon.</p>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

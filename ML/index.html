@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Medical Inventory Demand Predictor</title>
+
+  <!-- Google Fonts (optional) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Animate.css for quick animations (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #e2f3f5, #fafafa);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-weight: 600;
+      color: #2a8fbf;
+    }
+
+    /* Container for the form */
+    .container {
+      background-color: #ffffffee;
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 350px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    /* Animate the container appearance */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 15px 0 5px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button {
+      background: #2a8fbf;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #256f93;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      animation: pulse 0.5s;
+    }
+
+    /* Pulse animation for the result */
+    @keyframes pulse {
+      0% { transform: scale(0.95); }
+      70% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .success {
+      background-color: #dff5e1;
+      color: #2e7d32;
+      border: 1px solid #c4e6c5;
+    }
+
+    .error {
+      background-color: #fdecea;
+      color: #c62828;
+      border: 1px solid #f5c6cb;
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 400px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+
+  <div class="container animate__animated animate__fadeInDown">
+    <h1>Medical Demand Predictor</h1>
+
+    <!-- Temperature -->
+    <label for="temp">Temperature (°C)</label>
+    <input type="number" step="0.1" id="temp" placeholder="e.g. 30.5" />
+
+    <!-- Sales -->
+    <label for="sales">Recent Sales</label>
+    <input type="number" id="sales" placeholder="e.g. 140" />
+
+    <!-- Month -->
+    <label for="month">Month</label>
+    <select id="month">
+      <option value="">Select a Month</option>
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+
+    <!-- Medicine Type -->
+    <label for="medType">Medicine Type</label>
+    <select id="medType">
+      <option value="">Select Medicine</option>
+      <option value="paracetamol">Paracetamol</option>
+      <option value="cough_syrup">Cough Syrup</option>
+      <option value="ors_sachet">ORS Sachet</option>
+      <option value="antacid">Antacid</option>
+      <option value="antibiotic">Antibiotic</option>
+      <option value="pain_reliever">Pain Reliever</option>
+    </select>
+
+    <button onclick="getPrediction()">Predict Demand</button>
+
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    async function getPrediction() {
+      // Grab the input values
+      const temperature = document.getElementById('temp').value.trim();
+      const sales = document.getElementById('sales').value.trim();
+      const month = document.getElementById('month').value;
+      const medicineType = document.getElementById('medType').value;
+      const resultDiv = document.getElementById('result');
+
+      // Simple validation
+      if (!temperature || !sales || !month || !medicineType) {
+        resultDiv.style.display = 'block';
+        resultDiv.className = 'result error';
+        resultDiv.textContent = '❌ Please fill in all fields.';
+        return;
+      }
+
+      // Construct the payload
+      const payload = {
+        "Temperature": parseFloat(temperature),
+        "Sales": parseInt(sales),
+        "Month": parseInt(month),
+        "Medicine_Type": medicineType
+      };
+
+      // Clear old result
+      resultDiv.style.display = 'none';
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          const predictions = data.predictions;
+          if (predictions && predictions.length > 0) {
+            const { Predicted_Demand } = predictions[0];
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result success';
+            resultDiv.textContent = `✅ Predicted Demand: ${Predicted_Demand}`;
+          } else {
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result error';
+            resultDiv.textContent = '❌ No predictions returned.';
+          }
+        } else {
+          // Some error from server
+          resultDiv.style.display = 'block';
+          resultDiv.className = 'result error';
+          resultDiv.textContent = `❌ Error: ${data.error || 'Something went wrong'}`;
+        }
+      } catch (error) {
+        resultDiv.style.display = 'block';
+        resultDiv.className = 'result error';
+        resultDiv.textContent = `❌ Network/Server error: ${error.message}`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CureLink - Reports</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="report.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-text">CureLink</div>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item ">
+                    <a href="/home/index.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Dashboard</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="/categories/index.html" class="nav-link">
+                        <div class="nav-icon">🗂️</div>
+                        <div>Categories</div>
+                    </a>
+                </div> -->
+                <div class="nav-item">
+                    <a href="/order/index.html" class="nav-link">
+                        <div class="nav-icon">🛒</div>
+                        <div>Orders</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/inventory/index.html" class="nav-link">
+                        <div class="nav-icon">💳</div>
+                        <div>Inventory</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/billing/index.html" class="nav-link">
+                        <div class="nav-icon">↔️</div>
+                        <div>Billing</div>
+                    </a>
+                </div>
+                <div class="nav-item active">
+                    <a href="/reports/reports.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Reports</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/ML/index.html" class="nav-link">
+                        <div class="nav-icon">📈</div>
+                        <div>Stock Prediction</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">🏭</div>
+                        <div>Supplier</div>
+                    </a>
+                </div> -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">⚙️</div>
+                        <div>Settings</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="nav-divider"></div>
+            
+            <div class="nav-item logout">
+                <div class="nav-icon">🚪</div>
+                <div>Logout</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="report-section">
+                <h2 style="margin-bottom: 20px;">Stock Report</h2>
+                
+                <div class="filters-section">
+                    <select class="filter-select" id="reportType">
+                        <option value="stock">Stock Status</option>
+                        <option value="expiry">Expiry Report</option>
+                        <option value="vendor">Vendor Analysis</option>
+                    </select>
+
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="tablet">Tablets</option>
+                        <option value="syrup">Syrups</option>
+                        <option value="capsule">Capsules</option>
+                    </select>
+
+                    <input type="date" class="date-input" id="dateFrom">
+                    <input type="date" class="date-input" id="dateTo">
+                    
+                    <button class="report-btn" onclick="generateReport()">Generate Report</button>
+                    <button class="report-btn" onclick="downloadReport()">Download Report</button>
+                </div>
+
+                <div id="reportContent">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Medicine</th>
+                                <th>Category</th>
+                                <th>Current Stock</th>
+                                <th>Status</th>
+                                <th>Vendor</th>
+                                <th>Expiry</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportBody">
+                            <!-- Sample data since we don't have the API -->
+                            <tr>
+                                <td>Paracetamol 500mg</td>
+                                <td>Tablet</td>
+                                <td>250</td>
+                                <td><span class="status-pill status-in">In Stock</span></td>
+                                <td>MedPharm Supplies</td>
+                                <td>03/15/2026</td>
+                            </tr>
+                            <tr>
+                                <td>Amoxicillin 250mg</td>
+                                <td>Capsule</td>
+                                <td>20</td>
+                                <td><span class="status-pill status-low">Low Stock</span></td>
+                                <td>GlobalMed Inc</td>
+                                <td>05/22/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Ibuprofen Syrup</td>
+                                <td>Syrup</td>
+                                <td>0</td>
+                                <td><span class="status-pill status-out">Out of Stock</span></td>
+                                <td>HealthCare Distributors</td>
+                                <td>12/10/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Cetirizine 10mg</td>
+                                <td>Tablet</td>
+                                <td>150</td>
+                                <td><span class="status-pill status-in">In Stock</span></td>
+                                <td>MedPharm Supplies</td>
+                                <td>08/30/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Azithromycin 500mg</td>
+                                <td>Tablet</td>
+                                <td>45</td>
+                                <td><span class="status-pill status-in">In Stock</span></td>
+                                <td>GlobalMed Inc</td>
+                                <td>02/15/2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateReport() {
+            // In a real app, this would fetch data from your API
+            // For now, we'll just show an alert
+            alert('Report generated successfully!');
+        }
+
+        function downloadReport() {
+            const table = document.querySelector('.report-table');
+            const rows = table.querySelectorAll('tr');
+            let csv = [];
+
+            for (const row of rows) {
+                const cells = row.querySelectorAll('td, th');
+                const csvRow = Array.from(cells).map(cell => {
+                    // Get text content but remove status pill formatting
+                    let text = cell.textContent.trim();
+                    if (text.includes(',')) {
+                        text = `"${text}"`;
+                    }
+                    return text;
+                });
+                csv.push(csvRow.join(','));
+            }
+
+            const csvContent = csv.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `curelink_inventory_report_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">MF</div>
+                <div class="logo-text">CureLink</div>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item">
+                    <a href="/home/index.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Dashboard</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="/categories/index.html" class="nav-link">
+                        <div class="nav-icon">🗂️</div>
+                        <div>Categories</div>
+                    </a>
+                </div> -->
+                <div class="nav-item">
+                    <a href="/order/index.html" class="nav-link">
+                        <div class="nav-icon">🛒</div>
+                        <div>Orders</div>
+                    </a>
+                </div>
+                <div class="nav-item active">
+                    <a href="/inventory/index.html" class="nav-link">
+                        <div class="nav-icon">💳</div>
+                        <div>Inventory</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/billing/index.html" class="nav-link">
+                        <div class="nav-icon">↔️</div>
+                        <div>Billing</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/reports/reports.html" class="nav-link">
+                        <div class="nav-icon">📊</div>
+                        <div>Reports</div>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/ML/index.html" class="nav-link">
+                        <div class="nav-icon">📈</div>
+                        <div>Stock Prediction</div>
+                    </a>
+                </div>
+                <!-- <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">🏭</div>
+                        <div>Supplier</div>
+                    </a>
+                </div> -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon">⚙️</div>
+                        <div>Settings</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="nav-divider"></div>
+            
+            <div class="nav-item logout">
+                <div class="nav-icon">🚪</div>
+                <div>Logout</div>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <input type="text" placeholder="Search here..." class="search-bar">
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="breadcrumb-section">
+                    <div class="breadcrumb">
+                        Main > Inventory
+                        <div class="date-controls">
+                            <div class="performance">
+                                <h1>Inventory</h1>
+                            </div>
+                            <div class="search-section">
+                                <input type="text" id="searchInput" placeholder="Search">
+                                <button onclick="searchData()">Search</button>
+                            </div>                       
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Stats Grid - Second Row -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Out of Stock</h3>
+                        <h2 id="outOfStockCount"></h2>
+                        <canvas id="clinicsChart" style="width: 100%; height: 150px;"></canvas>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Ordered</h3>
+                        <h2></h2>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Unavailable</h3>
+                        <h2>111</h2>
+                        <canvas id="usersChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="syrup">Syrup</option>
+                            <option value="capsule">Capsule</option>
+                        </select>
+
+                        <select id="stockFilter" class="filter-select">
+                            <option value="">All Stock Status</option>
+                            <option value="In Stock">In Stock</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                            <option value="Low Stock">Low Stock</option>
+                        </select>
+
+                        <select id="expireFilter" class="filter-select">
+                            <option value="">Expiry Sort</option>
+                            <option value="asc">Nearest First</option>
+                            <option value="desc">Latest First</option>
+                        </select>
+
+                        <button id="resetFilters" class="filter-button">Reset Filters</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Batch</th>
+                            <th>Medicine Name</th>
+                            <th>Category</th>
+                            <th>Vendor</th>
+                            <th>Stock</th>
+                            <th>Quantity</th>
+                            <th>Expire</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div>
+                    <h2>Add Entry</h2>
+                    <input type="text" id="medicineInput" placeholder="Medicine Name">
+                    <input type="text" id="categoryInput" placeholder="Category">
+                    <input type="text" id="vendorInput" placeholder="Vendor">
+                    <input type="text" id="stockInput" placeholder="Stock Status">
+                    <input type="number" id="quantityInput" placeholder="Quantity">
+                    <input type="number" id="expireInput" placeholder="Expire">
+                    <button onclick="addEntry()">Add</button>
+                </div>
+                <<div class="fab-container">
+                    <div class="fab-options">
+                        <div class="fab-option">
+                            <span class="fab-option-label">Add Medicine</span>
+                            <a href="/add.html" class="fab-option-button">
+                                <i class="fas fa-pills"></i>
+                            </a>
+                        </div>
+                        <div class="fab-option">
+                            <span class="fab-option-label">Reports</span>
+                            <a href="/reports.html" class="fab-option-button">
+                                <i class="fas fa-chart-bar"></i>
+                            </a>
+                        </div>
+                        <div class="fab-option">
+                            <span class="fab-option-label">Settings</span>
+                            <a href="/settings.html" class="fab-option-button">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                        </div>
+                        <div class="fab-option">
+                            <span class="fab-option-label">Inventory</span>
+                            <a href="/inventory.html" class="fab-option-button">
+                                <i class="fas fa-boxes"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fab-main">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            
+                <script>
+                    // Your existing table/search JavaScript here
+            
+                    // FAB JavaScript
+                    const fabContainer = document.querySelector('.fab-container');
+                    const fabMain = document.querySelector('.fab-main');
+            
+                    fabMain.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        fabContainer.classList.toggle('show-options');
+                    });
+            
+                    // Close FAB when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!fabContainer.contains(e.target)) {
+                            fabContainer.classList.remove('show-options');
+                        }
+                    });
+                </script>
+                <script>
+                    const apiUrl = 'http://localhost:3000/entries';
+
+                    // Global filter state
+                    let activeFilters = {
+                        category: '',
+                        stock: '',
+                        expire: ''
+                    };
+
+                    function getStockStatus(quantity) {
+                        if (quantity <= 0) return "Out of Stock";
+                        if (quantity < 30) return "Low Stock";
+                        return "In Stock";
+                    }
+
+                    // Function to apply filters to data
+                    function applyFilters(data) {
+                        let filteredData = [...data];
+
+                        // Apply category filter
+                        if (activeFilters.category) {
+                            filteredData = filteredData.filter(item =>
+                                item.category.toLowerCase() === activeFilters.category.toLowerCase()
+                            );
+                        }
+
+                        // Apply stock status filter
+                        if (activeFilters.stock) {
+                            filteredData = filteredData.filter(item =>
+                                getStockStatus(item.quantity) === activeFilters.stock
+                            );
+                        }
+
+                        // Apply expiry sort
+                        if (activeFilters.expire) {
+                            filteredData.sort((a, b) => {
+                                if (activeFilters.expire === 'asc') {
+                                    return a.expire - b.expire;
+                                } else {
+                                    return b.expire - a.expire;
+                                }
+                            });
+                        }
+
+                        return filteredData;
+                    }
+
+                    // Function to fetch and display entries
+                    async function fetchEntries() {
+                        try {
+                            const response = await fetch(apiUrl);
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            let data = await response.json();
+
+                            // Apply filters to data
+                            data = applyFilters(data);
+
+                            const tableBody = document.getElementById('tableBody');
+                            tableBody.innerHTML = data.map(entry => {
+                                const stockStatus = getStockStatus(entry.quantity);
+                                return `
+            <tr>
+                <td>${entry.batch}</td>
+                <td>${entry.medicine}</td>
+                <td>${entry.category}</td>
+                <td><input class="editable" type="text" value="${entry.vendor}" id="vendor-${entry.batch}"></td>
+                <td>${stockStatus}</td>
+                <td><input class="editable" type="number" value="${entry.quantity}" id="quantity-${entry.batch}" onchange="updateStockStatus(${entry.batch})"></td>
+                <td><input class="editable" type="number" value="${entry.expire}" id="expire-${entry.batch}"></td>
+                <td>
+                    <button onclick="updateEntry(${entry.batch})">Update</button>
+                    
+                </td>
+            </tr>
+        `}).join('');
+                        } catch (error) {
+                            console.error('Error fetching entries:', error);
+                            alert('Error loading data from server');
+                        }
+                    }
+
+                    // Event listeners for filters
+                    document.addEventListener('DOMContentLoaded', () => {
+                        // Set up filter event listeners
+                        document.getElementById('categoryFilter').addEventListener('change', (e) => {
+                            activeFilters.category = e.target.value;
+                            fetchEntries();
+                        });
+
+                        document.getElementById('stockFilter').addEventListener('change', (e) => {
+                            activeFilters.stock = e.target.value;
+                            fetchEntries();
+                        });
+
+                        document.getElementById('expireFilter').addEventListener('change', (e) => {
+                            activeFilters.expire = e.target.value;
+                            fetchEntries();
+                        });
+
+                        document.getElementById('resetFilters').addEventListener('click', () => {
+                            // Reset all filters
+                            activeFilters = {
+                                category: '',
+                                stock: '',
+                                expire: ''
+                            };
+
+                            // Reset select elements
+                            document.getElementById('categoryFilter').value = '';
+                            document.getElementById('stockFilter').value = '';
+                            document.getElementById('expireFilter').value = '';
+
+                            // Refresh data
+                            fetchEntries();
+                        });
+
+                        // Initial fetch
+                        fetchEntries();
+                    });
+
+                    // Keep all other existing functions (updateEntry, deleteEntry, etc.) as they are...
+
+                    // Function to update stock status when quantity changes
+                    function updateStockStatus(batch) {
+                        const quantityInput = document.getElementById(`quantity-${batch}`);
+                        const quantity = parseInt(quantityInput.value);
+                        const stockCell = quantityInput.parentElement.previousElementSibling;
+                        stockCell.textContent = getStockStatus(quantity);
+                    }
+
+                    // Function to add new entry
+                    async function addEntry() {
+                        const medicine = document.getElementById('medicineInput').value;
+                        const category = document.getElementById('categoryInput').value;
+                        const vendor = document.getElementById('vendorInput').value;
+                        const quantity = document.getElementById('quantityInput').value;
+                        const expire = document.getElementById('expireInput').value;
+
+                        // Calculate stock status automatically
+                        const stock = getStockStatus(parseInt(quantity));
+
+                        if (!medicine || !category || !vendor || !quantity || !expire) {
+                            alert('All fields are required');
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    medicine,
+                                    category,
+                                    vendor,
+                                    stock,
+                                    quantity,
+                                    expire
+                                }),
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+
+                            // Clear input fields
+                            document.getElementById('medicineInput').value = '';
+                            document.getElementById('categoryInput').value = '';
+                            document.getElementById('vendorInput').value = '';
+                            document.getElementById('quantityInput').value = '';
+                            document.getElementById('expireInput').value = '';
+
+                            // Refresh table data
+                            await fetchEntries();
+                            alert('Entry added successfully');
+                        } catch (error) {
+                            console.error('Error adding entry:', error);
+                            alert('Error adding entry');
+                        }
+                    }
+                    // Function to update entry
+                    async function updateEntry(batch) {
+                        // Get current medicine and category values from the table row
+                        const row = document.getElementById(`vendor-${batch}`).closest('tr');
+                        const medicine = row.cells[1].textContent;
+                        const category = row.cells[2].textContent;
+
+                        const vendor = document.getElementById(`vendor-${batch}`).value;
+                        const quantity = document.getElementById(`quantity-${batch}`).value;
+                        const expire = document.getElementById(`expire-${batch}`).value;
+
+                        // Calculate stock status automatically
+                        const stock = getStockStatus(parseInt(quantity));
+
+                        if (!vendor || !quantity || !expire) {
+                            alert('All fields are required');
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch(`${apiUrl}/${batch}`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    medicine,    // Include original medicine name
+                                    category,    // Include original category
+                                    vendor,
+                                    stock,
+                                    quantity: parseInt(quantity),
+                                    expire: parseInt(expire)
+                                }),
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+
+                            await fetchEntries();
+                            alert('Entry updated successfully');
+                        } catch (error) {
+                            console.error('Error updating entry:', error);
+                            alert('Error updating entry: ' + error.message);
+                        }
+                    }
+
+                    // Add event listener for filter input if it exists
+                    const filterInput = document.getElementById('filterInput');
+                    if (filterInput) {
+                        filterInput.addEventListener('input', (e) => {
+                            fetchEntries(e.target.value);
+                        });
+                    }
+                    // Initial fetch of entries when page loads
+                    document.addEventListener('DOMContentLoaded', () => {
+                        fetchEntries();
+                    });
+                    // Fetch entries every 10 seconds to keep data updated
+                    // setInterval(() => {
+                    //     fetchEntries();
+                    // }, 10000);
+                </script>
+                <script>
+                    const searchInput = document.getElementById('searchInput');
+                    const tableBody = document.getElementById('tableBody');
+                    const API_URL = 'http://localhost:3000';
+            
+                    // Function to display data
+                    function displayData(entries) {
+                        tableBody.innerHTML = '';
+                        
+                        if (entries.length === 0) {
+                            tableBody.innerHTML = `
+                                <tr>
+                                    <td colspan="7" class="no-results">No matching results found</td>
+                                </tr>`;
+                            return;
+                        }
+            
+                        entries.forEach(entry => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${entry.batch}</td>
+                                <td>${entry.medicine}</td>
+                                <td>${entry.category}</td>
+                                <td>${entry.vendor}</td>
+                                <td>${entry.stock}</td>
+                                <td>${entry.quantity}</td>
+                                <td>${formatDate(entry.expire)}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    }
+            
+                    // Format date function
+                    function formatDate(dateString) {
+                        if (!dateString) return '';
+                        const date = new Date(dateString);
+                        return date.toLocaleDateString();
+                    }
+            
+                    // Function to fetch all entries
+                    async function fetchAllEntries() {
+                        try {
+                            const response = await fetch(`${API_URL}/entries`);
+                            const data = await response.json();
+                            displayData(data);
+                        } catch (error) {
+                            console.error('Error fetching entries:', error);
+                            tableBody.innerHTML = `
+                                <tr>
+                                    <td colspan="7" class="no-results">Error loading data</td>
+                                </tr>`;
+                        }
+                    }
+            
+                    // Function to search entries
+                    async function searchEntries(searchTerm) {
+                        try {
+                            const response = await fetch(`${API_URL}/search?q=${encodeURIComponent(searchTerm)}`);
+                            const data = await response.json();
+                            displayData(data);
+                        } catch (error) {
+                            console.error('Error searching entries:', error);
+                            tableBody.innerHTML = `
+                                <tr>
+                                    <td colspan="7" class="no-results">Error searching data</td>
+                                </tr>`;
+                        }
+                    }
+            
+                    // Add debounce function to prevent too many API calls
+                    function debounce(func, wait) {
+                        let timeout;
+                        return function executedFunction(...args) {
+                            const later = () => {
+                                clearTimeout(timeout);
+                                func(...args);
+                            };
+                            clearTimeout(timeout);
+                            timeout = setTimeout(later, wait);
+                        };
+                    }
+            
+                    // Event listener for search input with debouncing
+                    searchInput.addEventListener('input', debounce((e) => {
+                        const searchTerm = e.target.value.trim();
+                        if (searchTerm) {
+                            searchEntries(searchTerm);
+                        } else {
+                            fetchAllEntries();
+                        }
+                    }, 300));
+            
+                    // Load initial data
+                    fetchAllEntries();
+                </script>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <script src="server.js"></script>
+    <script src="stockChart.js"></script>
+</body>
+
+</html>
